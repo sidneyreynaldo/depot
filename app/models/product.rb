@@ -1,9 +1,12 @@
+#encoding: utf-8
 class Product < ActiveRecord::Base
   attr_accessible :title, :description, :image_url, :price
 
   validates :title, :description, :image_url, :presence => true
 
   validates :title, :uniqueness => true
+
+  validates_length_of :title, :minimum => 10, :too_short => 'deve conter pelo menos 10 caracteres.'
 
   validates :image_url, :format => {
   	:with    => %r{\.(gif|jpg|png)$}i,
